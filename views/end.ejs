@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/bulma.min.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <% if (!error) { %>
+      <p>¡Gracias! Has votado por <%= selected %>.</p>
+    <% } else { %>
+      <p>Lo siento, ya has votado.</p>
+    <% } %>
+  </body>
+</html>

@@ -1,11 +1,21 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="es">
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/bulma.min.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <form action="/vote" method="post">
+      <div class="field">
+        <label class="label">Introduce tu código</label>
+        <div class="control">
+          <input type="text" class="input" name="ticket" placeholder="xxxx-x-xxxx"/>
+        </div>
+      </div>
+      <div class="control">
+        <button type="submit" class="button is-primary">Submit</button>
+      </div>
+    </form>
   </body>
 </html>

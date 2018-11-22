@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/bulma.min.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <p>Tu código es <%= ticket %></p>
+    <p><%= result %></p>
+    <br>
+    <% if (more) { %>
+      <form action="/end" method="post">
+
+        <div class="field">
+          <label class="label">Código</label>
+          <div class="control">
+            <input class="input" name="ticket" value="<%= ticket %>" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Elige tu opción</label>
+          <div class="control">
+            <div class="select">
+              <select name="selected">
+                <option>Opción 1</option>
+                <option>Opción 2</option>
+                <option>Opción 3</option>
+                <option>Opción 4</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="control">
+          <button class="button is-primary" type="submit">Votar</button>
+        </div>
+
+      </form>
+    <% } %>
+    <p><%= error %></p>
+  </body>
+</html>
