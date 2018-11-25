@@ -2,43 +2,34 @@
 <html lang="es">
   <head>
     <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/bulma.min.css" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <p>Tu código es <%= ticket %></p>
-    <p><%= result %></p>
-    <br>
-    <% if (more) { %>
-      <form action="/end" method="post">
+    <div class="wrapper">
+      <% if (!error) { %>
+        <div class="ticket">
+          <div><img src="/images/ticket.svg"></div>
+          <h1><%= ticketId %></h1>   
+        </div>
+        <form action="/end" method="post">
 
-        <div class="field">
-          <label class="label">Código</label>
-          <div class="control">
-            <input class="input" name="ticket" value="<%= ticket %>" />
+          <div class="group">
+            <input class="hidden" name="ticketId" value="<%= ticketId %>" />
+            <label class="label">Elige tu opción</label>
+            <select name="selectedOption">
+              <% options.forEach(option => { %>
+                <option value="<%= option.value %>"><%= option.name %></option>
+              <% }) %>
+            </select>
+            <button class="button is-primary" type="submit">
+              <img src="/images/ok.svg">
+            </button>
           </div>
-        </div>
 
-        <div class="field">
-          <label class="label">Elige tu opción</label>
-          <div class="control">
-            <div class="select">
-              <select name="selected">
-                <option>Opción 1</option>
-                <option>Opción 2</option>
-                <option>Opción 3</option>
-                <option>Opción 4</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="control">
-          <button class="button is-primary" type="submit">Votar</button>
-        </div>
-
-      </form>
-    <% } %>
-    <p><%= error %></p>
+        </form>
+      <% } else { %>
+        <h1><%= error %></h1>
+      <% } %>
+    </div>
   </body>
 </html>

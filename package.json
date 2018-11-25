@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node -r esm ./bin/www",
-    "dev": "nodemon -r esm ./bin/www",
+    "dev": "nodemon -e js,css,html,ejs -r esm ./bin/www",
     "load": "node -r esm ./load.js"
   },
   "dependencies": {

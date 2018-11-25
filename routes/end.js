@@ -8,27 +8,27 @@ router.get('/', function (req, res, next) {
 })
 
 router.post('/', async function (req, res, next) {
-  const { selected, ticket } = req.body
-  let error = false
+  const { selectedOption, ticketId } = req.body
+  let error
   try {
     const db = await sqlite.open('./database.sqlite')
-    const census = await db.get('SELECT voted FROM Census WHERE id=?', ticket)
-    const hasVoted = census.voted
+    const census = await db.get('SELECT voted FROM Census WHERE id=?', ticketId)
+    const hasVoted = census && census.voted
     if (!hasVoted) {
-      await db.run('INSERT INTO Votes (result) VALUES (?)', selected)
-      await db.run('UPDATE Census SET voted=1 WHERE id=?', ticket)
+      await db.run('INSERT INTO Votes (result) VALUES (?)', selectedOption)
+      await db.run('UPDATE Census SET voted=1 WHERE id=?', ticketId)
     } else {
-      error = true
+      error = 'Lo siento, ya has votado.'
     }
     await db.close()
   } catch (e) {
-    console.log(e)
+    error = e
   }
 
   res.render('end', {
-    title: 'END',
-    error,
-    selected
+    title: 'FrontFest Vote',
+    selectedOption,
+    error
   })
 })
 

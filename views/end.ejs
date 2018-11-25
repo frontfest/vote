@@ -2,14 +2,15 @@
 <html lang="es">
   <head>
     <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/bulma.min.css" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <% if (!error) { %>
-      <p>¡Gracias! Has votado por <%= selected %>.</p>
-    <% } else { %>
-      <p>Lo siento, ya has votado.</p>
-    <% } %>
+    <div class="wrapper">
+      <% if (!error) { %>
+        <h1>¡Gracias! Has votado por <%= selectedOption %>.</h1>
+      <% } else { %>
+        <h1>Lo siento, ya has votado.</h1>
+      <% } %>
+    </div>
   </body>
 </html>

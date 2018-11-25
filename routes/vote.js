@@ -8,23 +8,27 @@ router.get('/', function (req, res, next) {
 })
 
 router.post('/', async function (req, res, next) {
-  const { ticket } = req.body
+  const { ticketId } = req.body
   let error
-  let result
-  let more = false
+
+  const options = [
+    { value: 'OPT1', name: 'Opción 1' },
+    { value: 'OPT2', name: 'Opción 2' },
+    { value: 'OPT3', name: 'Opción 3' },
+    { value: 'OPT4', name: 'Opción 4' }
+  ]
 
   try {
     const db = await sqlite.open('./database.sqlite')
-    const voted = await db.get('SELECT voted FROM Census WHERE id=?;', ticket)
-    if (voted) {
-      if (voted.voted === 0) {
-        result = 'Puedes votar'
-        more = true
+    const individual = await db.get('SELECT voted FROM Census WHERE id=?;', ticketId)
+    if (individual) {
+      if (individual.voted === 0) {
+        error = false
       } else {
-        result = 'Ya has votado'
+        error = 'Lo siento, ya has votado.'
       }
     } else {
-      result = 'No existe el usuario'
+      error = 'No existe el localizador.'
     }
     await sqlite.close()
   } catch (e) {
@@ -32,11 +36,10 @@ router.post('/', async function (req, res, next) {
   }
 
   res.render('vote', {
-    ticket,
-    result,
-    more,
-    error,
-    title: 'voto'
+    title: 'FrontFest Vote',
+    options,
+    ticketId,
+    error
   })
 })
 
