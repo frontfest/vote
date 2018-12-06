@@ -1,12 +1,12 @@
-import express from 'express'
-import path from 'path'
-import cookieParser from 'cookie-parser'
-import logger from 'morgan'
-import createError from 'http-errors'
+const createError = require('http-errors')
+const express = require('express')
+const path = require('path')
+const cookieParser = require('cookie-parser')
+const logger = require('morgan')
 
-import voteRouter from './routes/vote'
-import indexRouter from './routes/index'
-import endRouter from './routes/end'
+const voteRouter = require('./routes/vote')
+const indexRouter = require('./routes/index')
+const endRouter = require('./routes/end')
 
 const app = express()
 
@@ -40,4 +40,4 @@ app.use(function (err, req, res, next) {
   res.render('error')
 })
 
-export default app
+module.exports = app

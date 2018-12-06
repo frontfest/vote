@@ -1,7 +1,7 @@
-import { Router } from 'express'
-import sqlite from 'sqlite'
+const express = require('express')
+const database = require('../database.js')
 
-const router = Router()
+const router = express.Router()
 
 router.get('/', function (req, res, next) {
   res.redirect('/')
@@ -19,8 +19,8 @@ router.post('/', async function (req, res, next) {
   ]
 
   try {
-    const db = await sqlite.open('./database.sqlite')
-    const individual = await db.get('SELECT voted FROM Census WHERE id=?;', ticketId)
+    const db = await database.connect()
+    const individual = await database.getCensusIndividual(db, ticketId)
     if (individual) {
       if (individual.voted === 0) {
         error = false
@@ -30,7 +30,7 @@ router.post('/', async function (req, res, next) {
     } else {
       error = 'No existe el localizador.'
     }
-    await sqlite.close()
+    await database.disconnect()
   } catch (e) {
     error = e
   }
@@ -43,4 +43,4 @@ router.post('/', async function (req, res, next) {
   })
 })
 
-export default router
+module.exports = router

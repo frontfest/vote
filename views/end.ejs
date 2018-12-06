@@ -9,7 +9,7 @@
       <% if (!error) { %>
         <h1>¡Gracias! Has votado por <%= selectedOption %>.</h1>
       <% } else { %>
-        <h1>Lo siento, ya has votado.</h1>
+        <h1><%= error %></h1>
       <% } %>
     </div>
   </body>

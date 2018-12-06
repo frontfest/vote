@@ -1,7 +1,7 @@
-import { Router } from 'express'
-import sqlite from 'sqlite'
+const express = require('express')
+const database = require('../database.js')
 
-const router = Router()
+const router = express.Router()
 
 router.get('/', function (req, res, next) {
   res.redirect('/')
@@ -11,16 +11,16 @@ router.post('/', async function (req, res, next) {
   const { selectedOption, ticketId } = req.body
   let error
   try {
-    const db = await sqlite.open('./database.sqlite')
-    const census = await db.get('SELECT voted FROM Census WHERE id=?', ticketId)
-    const hasVoted = census && census.voted
+    const db = await database.connect()
+    const individual = await database.getCensusIndividual(db, ticketId)
+    const hasVoted = individual && individual.voted
     if (!hasVoted) {
-      await db.run('INSERT INTO Votes (result) VALUES (?)', selectedOption)
-      await db.run('UPDATE Census SET voted=1 WHERE id=?', ticketId)
+      await database.insertVote(db, selectedOption)
+      await database.updateCensusIndividual(db, ticketId)
     } else {
       error = 'Lo siento, ya has votado.'
     }
-    await db.close()
+    await database.disconnect()
   } catch (e) {
     error = e
   }
@@ -32,4 +32,4 @@ router.post('/', async function (req, res, next) {
   })
 })
 
-export default router
+module.exports = router

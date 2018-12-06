@@ -1,7 +1,7 @@
-import fs from 'fs'
-import path from 'path'
-import sqlite from 'sqlite'
-import readline from 'readline'
+const fs = require('fs')
+const path = require('path')
+const sqlite = require('sqlite')
+const readline = require('readline')
 
 const DB_FILE = 'database.sqlite'
 const DATA_FILE = process.argv[2]

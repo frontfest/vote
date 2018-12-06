@@ -1,16 +1,15 @@
 {
   "name": "vote",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
-    "start": "node -r esm ./bin/www",
-    "dev": "nodemon -e js,css,html,ejs -r esm ./bin/www",
-    "load": "node -r esm ./load.js"
+    "start": "node ./bin/www",
+    "test": "jest",
+    "load": "node ./load.js"
   },
   "dependencies": {
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.7",
-    "esm": "^3.0.84",
     "express": "^4.16.0",
     "http-errors": "^1.6.2",
     "morgan": "^1.9.0",
@@ -23,6 +22,8 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint-plugin-standard": "^4.0.0",
+    "jest": "^23.6.0",
+    "supertest": "^3.3.0"
   }
 }
