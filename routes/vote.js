@@ -34,7 +34,6 @@ router.post('/', async function (req, res, next) {
   }
 
   res.render('vote', {
-    title: 'FrontFest Vote',
     options,
     ticketId,
     error

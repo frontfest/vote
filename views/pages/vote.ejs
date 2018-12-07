@@ -1,0 +1,29 @@
+<% include ../partials/head %>
+
+<% if (!error) { %>
+  <div class="ticket">
+    <div><img src="/images/ticket.svg"></div>
+    <h1><%= ticketId %></h1>   
+  </div>
+  <form action="/done" method="post">
+
+    <div class="group">
+      <input class="hidden" name="ticketId" value="<%= ticketId %>" />
+      <label class="label">Elige tu opción</label>
+      <select name="selectedOption">
+        <% options.forEach(option => { %>
+          <option value="<%= option.value %>"><%= option.name %></option>
+        <% }) %>
+      </select>
+      <button class="button is-primary" type="submit">
+        <img src="/images/ok.svg">
+      </button>
+    </div>
+
+  </form>
+<% } else { %>
+  <h1><%= error %></h1>
+<% } %>
+
+<% include ../partials/foot %>
+

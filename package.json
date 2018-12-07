@@ -1,6 +1,6 @@
 {
   "name": "vote",
-  "version": "0.5.0",
+  "version": "0.10.0",
   "private": true,
   "scripts": {
     "start:dev": "NODE_ENV=development node ./bin/www",

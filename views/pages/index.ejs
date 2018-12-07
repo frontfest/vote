@@ -1,0 +1,27 @@
+<% include ../partials/head %>
+
+<div>
+  <img class="logo" src="/images/frontfest.svg">
+</div>
+<form action="/vote" method="post">
+  <div class="group">
+    <label class="label">Introduce tu localizador</label>
+    <input type="text" class="input" name="ticketId" placeholder="xxxx-x-xxxx"/>
+    <button type="submit" class="button">
+      <img src="/images/ok.svg">
+    </button>
+    <p>
+      <strong>Puedes encontrar el localizador bajo el código QR en el PDF de Koliseo.</strong>
+    </p>
+    <p>
+      El localizador se utilizará únicamente para comprobar que se posee una entrada válida y evitar la duplicidad del voto.
+      No se relacionará en ningún caso con la opción elegida, manteniendo anónimo el sentido del voto.
+    </p>
+    <p> 
+      Más información sobre esta app y código fuente <a target="_blank" href="https://github.com/frontfest/vote">aquí</a>.
+    </p>
+  </div>
+</form>
+    
+<% include ../partials/foot %>
+

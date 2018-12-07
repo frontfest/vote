@@ -26,8 +26,7 @@ router.post('/', async function (req, res, next) {
     error = e
   }
 
-  res.render('end', {
-    title: 'FrontFest Vote',
+  res.render('done', {
     selectedOption,
     error
   })

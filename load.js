@@ -21,7 +21,7 @@ if (DATA_FILE) {
       })
 
       rl.question(
-        `The Census table will be dropped and created again with the new data (${censusArray.length} entries). Proceed? (y/N) `,
+        `The tables will be dropped and created again with the new data (${censusArray.length} entries for the census). Proceed? (y/N) `,
         async function (answer) {
           if (answer === 'y') {
             try {
