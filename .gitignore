@@ -62,4 +62,4 @@ typings/
 
 # Files with sensible data
 data.txt
-database.sqlite
+*.sqlite

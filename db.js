@@ -1,13 +1,28 @@
 const Sequelize = require('sequelize')
 
-const DB_FILE = 'database.sqlite'
+let sequelize
 
-const sequelize = new Sequelize('database', 'username', 'password', {
-  host: 'localhost',
-  dialect: 'sqlite',
-  storage: DB_FILE, // SQLite only
-  operatorsAliases: false
-})
+if (process.env.NODE_ENV === 'production') {
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    operatorsAliases: false,
+    dialectOptions: {
+      ssl: true
+    }
+  })
+} else if (process.env.NODE_ENV === 'test') {
+  sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: 'database.test.sqlite',
+    operatorsAliases: false
+  })
+} else {
+  sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: 'database.development.sqlite',
+    operatorsAliases: false
+  })
+}
 
 const db = {}
 
