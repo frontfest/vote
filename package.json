@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "start:dev": "NODE_ENV=development node ./bin/www",
-    "start:prod": "NODE_ENV=production node ./bin/www",
+    "start": "NODE_ENV=production node ./bin/www",
     "load:dev": "NODE_ENV=development node ./load.js",
-    "load:prod": "NODE_ENV=production node ./load.js",
+    "load": "NODE_ENV=production node ./load.js",
     "test": "NODE_ENV=test jest"
   },
   "dependencies": {
