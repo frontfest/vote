@@ -1,5 +1,5 @@
 const express = require('express')
-const database = require('../database.js')
+const db = require('../db')
 
 const router = express.Router()
 
@@ -11,16 +11,17 @@ router.post('/', async function (req, res, next) {
   const { selectedOption, ticketId } = req.body
   let error
   try {
-    const db = await database.connect()
-    const individual = await database.getCensusIndividual(db, ticketId)
-    const hasVoted = individual && individual.voted
-    if (!hasVoted) {
-      await database.insertVote(db, selectedOption)
-      await database.updateCensusIndividual(db, ticketId)
+    const individual = await db.census.findOne({ where: { code: ticketId } })
+    if (individual) {
+      if (!individual.voted) {
+        await db.votes.create({ result: selectedOption })
+        await db.census.update({ voted: true }, { where: { code: ticketId } })
+      } else {
+        error = 'Lo siento, ya has votado.'
+      }
     } else {
-      error = 'Lo siento, ya has votado.'
+      error = 'No existe el localizador.'
     }
-    await database.disconnect()
   } catch (e) {
     error = e
   }
