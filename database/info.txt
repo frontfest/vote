@@ -1,0 +1,2 @@
+Sqlite databases will be created here.
+Create datasets here to be ignored by git (dataset.*)

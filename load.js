@@ -6,10 +6,10 @@ const readline = require('readline')
 
 const db = require('./db')
 
-const DATA_FILE = process.argv[2]
+const DATASET_FILE = process.argv[2]
 
-if (DATA_FILE) {
-  const filePath = path.join(__dirname, DATA_FILE)
+if (DATASET_FILE) {
+  const filePath = path.join(__dirname, DATASET_FILE)
 
   fs.readFile(filePath, { encoding: 'utf-8' }, function (readFileError, censusFile) {
     if (!readFileError) {
@@ -27,6 +27,7 @@ if (DATA_FILE) {
             try {
               await db.sequelize.sync({ force: true })
               await db.census.bulkCreate(censusArray.map(code => ({ code })))
+              await db.sequelize.close()
               console.log('Data loaded correctly.')
             } catch (sqliteError) {
               console.error(sqliteError)

@@ -2,26 +2,52 @@
 
 El objetivo de la aplicación es que los asistentes a un evento puedan votar introduciendo el código único o localizador de su entrada. Con esto se garantiza que únicamente puedan votar los asistentes reales, y además, como el localizador es único, se evita la duplicidad de voto.
 
-Se usa una base de datos **sqlite** para almacenar la información, que tendrá dos tablas:
+En principio se puede utilizar cualquiera de las bases de datos soportadas por [Sequelize](http://docs.sequelizejs.com/). En este aso usaremos una base de datos **sqlite** para los entornos de *testing* y *development*, y una **PostgreSQL** para *production*.
 
-- una llamada 'Census', que almacena la lista de localizadores y si han votado ya o no, para así evitar la duplicidad,
-- y otra llamada 'Votes', que no será más que una lista de votos, no asociados de ningún modo con los votantes.
+Existirán dos tablas:
+
+- una llamada 'census', que almacena la lista de localizadores y si han votado ya o no, para así evitar la duplicidad,
+- y otra llamada 'votes', que no será más que una lista de votos, no asociados de ningún modo con los votantes.
 
 De este modo conseguimos recabar la misma información que en unas elecciones normales, es decir, el porcentaje de participación y la cantidad de votos que recibe cada opción. Además, sabemos quién ha votado, pero no qué, por lo que podemos garantizar el anonimato del voto.
 
-## Cargar datos
+## Variables de entorno
 
-Crear un archivo en la raíz del proyecto llamado por ejemplo `data.txt`. Hay que introducir en este archivo el cuerpo electoral, que será la lista de localizadores, uno en cada línea. Con esta lista se alimentará la tabla 'Census' al ejecutar el script de carga.
+Se recomienda generar un archivo `.env` en la raíz del proyecto con las variables de entorno.
 
 ```bash
-yarn load data.txt
+DATABASE_URL=postgres://user:password@host:port/database
+PORT=3000
+```
+
+## Cargar datos
+
+Crear un archivo en la raíz del proyecto llamado, por ejemplo, `dataset.txt`. Hay que introducir en este archivo el censo electoral, que será la lista de localizadores, uno en cada línea. Con esta lista se alimentará la tabla 'census' al ejecutar el script de carga.
+
+```bash
+$ yarn load:dev dataset.txt # Carga los datos en un sqlite local, cuyo fichero se generará en la carpeta `database`
+$ yarn load dataset.txt # Carga los datos en el PostgreSQL cuya URL se define con la variable de entorno DATABASE_URL
 ```
 
 ## Ejecutar la aplicación
 
-Ejecutamos y accedemos a través del navegador web en el puerto 3000.
+Instalamos los `node_modules`.
 
 ```bash
-yarn install
-yarn start
+$ yarn install
+```
+
+Ejecutamos y accedemos a través del navegador web en el puerto definido por la variable de entorno PORT (por defecto 3000).
+
+```bash
+$ yarn start:dev # Usando sqlite
+$ yarn start # usando PostgreSQL
+```
+
+## Testing
+
+Para testear la aplicación se generará una base de datos local **sqlite** en la carpeta `database`. Los tests escritos hasta ahora son de integración.
+
+```bash
+$ yarn test
 ```

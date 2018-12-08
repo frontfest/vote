@@ -61,5 +61,6 @@ typings/
 .next
 
 # Files with sensible data
-data.txt
-*.sqlite
+database/*
+!database/dataset.sample.txt
+!database/info.txt

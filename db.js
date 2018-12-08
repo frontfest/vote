@@ -13,13 +13,13 @@ if (process.env.NODE_ENV === 'production') {
 } else if (process.env.NODE_ENV === 'test') {
   sequelize = new Sequelize({
     dialect: 'sqlite',
-    storage: 'database.test.sqlite',
+    storage: './database/database.test.sqlite',
     operatorsAliases: false
   })
 } else {
   sequelize = new Sequelize({
     dialect: 'sqlite',
-    storage: 'database.development.sqlite',
+    storage: './database/database.development.sqlite',
     operatorsAliases: false
   })
 }
