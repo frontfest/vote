@@ -1,0 +1,18 @@
+<% include ../partials/head %>
+
+<h2>Participación: <%= censusParticipationPercent %> %</h2>
+
+<br><br>
+
+<% countedVotes.forEach(option => { %>
+  <p>
+    <strong><%= option.name %></strong> /
+    <%= option.value %> votos /
+    <%= option.percent %> %
+    <div style="background: #555; height: 20px; width: 100%">
+      <div style="background: white; height: 20px; width: <%= `${option.percent}` %>%"></div>
+    </div>
+  </p>
+<% }) %>
+
+<% include ../partials/foot %>
