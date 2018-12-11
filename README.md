@@ -1,5 +1,9 @@
 # Webapp para hacer votaciones
 
+[![Build Status](https://travis-ci.org/frontfest/vote.svg?branch=master)](https://travis-ci.org/frontfest/vote)
+
+## Descripción
+
 El objetivo de la aplicación es que los asistentes a un evento puedan votar introduciendo el código único o localizador de su entrada. Con esto se garantiza que únicamente puedan votar los asistentes reales, y además, como el localizador es único, se evita la duplicidad de voto.
 
 En principio se puede utilizar cualquiera de las bases de datos SQL soportadas por [Sequelize](http://docs.sequelizejs.com/). En este caso usaremos una base de datos **sqlite** para los entornos de *testing* y *development*, y una **PostgreSQL** para *production*.
